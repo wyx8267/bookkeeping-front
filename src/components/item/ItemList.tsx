@@ -21,11 +21,11 @@ export const ItemList = defineComponent({
       { start: time.firstDayOfYear(), end: time.lastDayOfYear() }
     ]
     const refOverlayVisible = ref(false)
-    watchEffect(() => {
-      if (refSelected.value === '自定义时间') {
+    const onSelect = (value: string) => {
+      if (value === '自定义时间') {
         refOverlayVisible.value = true
       }
-    })
+    }
     const onSubmitCustomTime = (e: Event) => {
       e.preventDefault()
       refOverlayVisible.value = false
@@ -37,7 +37,7 @@ export const ItemList = defineComponent({
           icon: () => <Icon name='menu' />,
           default: () => (
             <>
-              <Tabs classPrefix='customTabs' v-model:selected={refSelected.value}>
+              <Tabs classPrefix='customTabs' v-model:selected={refSelected.value} onUpdate:selected={onSelect}>
                 <Tab name='本月'>
                   <ItemSummary startDate={timeList[0].start.format()} endDate={timeList[0].end.format()} />
                 </Tab>
@@ -60,7 +60,7 @@ export const ItemList = defineComponent({
                       <FormItem label='结束时间' v-model={customTime.end} type='date' />
                       <FormItem>
                         <div class={s.actions}>
-                          <button type="button">取消</button>
+                          <button type="button" onClick={() => refOverlayVisible.value = false}>取消</button>
                           <button type="submit">确认</button>
                         </div>
                       </FormItem>
