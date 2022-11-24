@@ -11,7 +11,12 @@ export default defineConfig(({ mode }) => {
     base: mode === 'production' ? '/bookkeeping-front/dist/' : './',
     server: {
       origin: 'http://localhost:3000/',
-      host: '0.0.0.0'
+      host: '0.0.0.0',
+      proxy: {
+        '/api/v1': {
+          target: 'http://47.109.52.85:3000/'
+        }
+      }
     },
     plugins: [
       vue(),
