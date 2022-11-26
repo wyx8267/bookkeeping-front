@@ -3,7 +3,7 @@ import { computed, defineComponent, PropType, ref } from 'vue';
 import { Button } from './Button';
 import { EmojiSelect } from './EmojiSelect';
 import s from './Form.module.scss';
-import { getFriendlyError } from './getFirendlyError';
+import { getFriendlyError } from './getFriendlyError';
 import { Time } from './time';
 
 export const Form = defineComponent({
@@ -41,7 +41,8 @@ export const FormItem = defineComponent({
     countFrom: {
       type: Number,
       default: 60
-    }
+    },
+    disabled: Boolean
   },
   emits: ['update:modelValue'],
   setup: (props, context) => {
@@ -77,7 +78,7 @@ export const FormItem = defineComponent({
         case 'validationCode':
           return <>
             <input class={[s.formItem, s.input, s.validationCodeInput]} placeholder={props.placeholder} />
-            <Button disabled={isCounting.value} onClick={props.onClick} class={[s.formItem, s.button, s.validationCodeButton]}>
+            <Button disabled={isCounting.value || props.disabled} onClick={props.onClick} class={[s.formItem, s.button, s.validationCodeButton]}>
               {isCounting.value ? `${count.value}秒后重置` : '发送验证码'}
             </Button>
           </>
