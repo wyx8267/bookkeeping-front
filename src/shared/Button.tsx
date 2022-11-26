@@ -19,7 +19,7 @@ export const Button = defineComponent({
     },
     disabled: {
       type: Boolean,
-      default: true
+      default: false
     },
     autoSelfDisabled: {
       type: Boolean,

@@ -5,7 +5,8 @@ import { Button } from '../shared/Button';
 import { Form, FormItem } from '../shared/Form';
 import { http } from '../shared/Http';
 import { Icon } from '../shared/Icon';
-import { validate } from '../shared/validate';
+import { hasError, validate } from '../shared/validate';
+import { history } from '../shared/history';
 import s from './SignInPage.module.scss';
 export const SignInPage = defineComponent({
   setup: (props, context) => {
@@ -19,7 +20,7 @@ export const SignInPage = defineComponent({
       email: [],
       code: []
     })
-    const onSubmit = (e: Event) => {
+    const onSubmit = async (e: Event) => {
       e.preventDefault()
       Object.assign(errors, {
         email: [], code: []
@@ -29,6 +30,11 @@ export const SignInPage = defineComponent({
         { key: 'email', type: 'pattern', regex: /.+@.+/, message: '必须是邮箱地址' },
         { key: 'code', type: 'required', message: '必填' },
       ]))
+      if (!hasError(errors)) {
+        const response = await http.post<{ jwt: string }>('/session', formData)
+        localStorage.setItem('jwt', response.data.jwt)
+        history.push('/')
+      }
     }
     const onError = (error: any) => {
       if (error.response.status === 422) {
@@ -68,7 +74,7 @@ export const SignInPage = defineComponent({
                   error={errors.code?.[0]}
                 />
                 <FormItem style={{ paddingTop: '96px' }}>
-                  <Button>登录</Button>
+                  <Button type='submit'>登录</Button>
                 </FormItem>
               </Form>
             </div>
