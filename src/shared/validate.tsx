@@ -43,13 +43,13 @@ function isEmpty(value: null | undefined | string | number | FData) {
 }
 
 export function hasError(errors: Record<string, string[]>) {
-  return Object.values(errors).reduce((result, value) => result + value.length, 0) > 0
-  // let result = false
-  // for (const key in errors) {
-  //   if (errors[key].length > 0) {
-  //     result = true
-  //     break
-  //   }
-  // }
-  // return result
+  // return Object.values(errors).reduce((result, value) => result + value.length, 0) > 0
+  let result = false
+  for (const key in errors) {
+    if (errors[key]?.length > 0) {
+      result = true
+      break
+    }
+  }
+  return result
 }
