@@ -124,3 +124,11 @@ export const mockItemIndex: Mock = (config) => {
     return [200, {}]
   }
 }
+
+export const mockItemIndexBalance: Mock = config => {
+  return [200, {
+    expenses: 9000,
+    income: 9900,
+    balance: 900
+  }]
+}
