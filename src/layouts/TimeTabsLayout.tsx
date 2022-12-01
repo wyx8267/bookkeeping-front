@@ -34,6 +34,10 @@ export const TimeTabsLayout = defineComponent({
       start?: string
       end?: string
     }>({})
+    const tempTime = reactive<{
+      start?: string
+      end?: string
+    }>({})
     const timeList = [
       { start: time.firstDayOfMonth(), end: time.lastDayOfMonth() },
       {
@@ -51,6 +55,7 @@ export const TimeTabsLayout = defineComponent({
     const onSubmitCustomTime = (e: Event) => {
       e.preventDefault()
       refOverlayVisible.value = false
+      Object.assign(customTime, tempTime)
     }
     return () => (
       <MainLayout>
@@ -96,12 +101,12 @@ export const TimeTabsLayout = defineComponent({
                     <Form onSubmit={onSubmitCustomTime}>
                       <FormItem
                         label="开始时间"
-                        v-model={customTime.start}
+                        v-model={tempTime.start}
                         type="date"
                       />
                       <FormItem
                         label="结束时间"
-                        v-model={customTime.end}
+                        v-model={tempTime.end}
                         type="date"
                       />
                       <FormItem>

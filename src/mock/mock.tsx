@@ -103,12 +103,20 @@ export const mockItemIndex: Mock = (config) => {
     per_page,
     count,
   })
+  const createTag = (attrs?: any) => ({
+    id: createId(),
+    name: faker.lorem.word(),
+    sign: faker.internet.emoji(),
+    kind: 'expenses',
+    ...attrs,
+  })
   const createItem = (n = 1, attrs?: any) =>
     Array.from({ length: n }).map(() => ({
       id: createId(),
       user_id: createId(),
       amount: Math.floor(Math.random() * 10000),
       tags_id: [createId()],
+      tags: [createTag()],
       happen_at: faker.date.past().toISOString(),
       kind: config.params.kind,
     }))
@@ -125,10 +133,13 @@ export const mockItemIndex: Mock = (config) => {
   }
 }
 
-export const mockItemIndexBalance: Mock = config => {
-  return [200, {
-    expenses: 9000,
-    income: 9900,
-    balance: 900
-  }]
+export const mockItemIndexBalance: Mock = (config) => {
+  return [
+    200,
+    {
+      expenses: 9000,
+      income: 9900,
+      balance: 900,
+    },
+  ]
 }
