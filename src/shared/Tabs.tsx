@@ -4,15 +4,15 @@ export const Tabs = defineComponent({
   props: {
     selected: {
       type: String as PropType<string>,
-      required: false,
+      required: false
     },
     classPrefix: {
-      type: String,
+      type: String
     },
     rendererOnSelect: {
       type: Boolean as PropType<boolean>,
-      default: false,
-    },
+      default: false
+    }
   },
   emits: ['update:selected'],
   setup: (props, context) => {
@@ -31,13 +31,8 @@ export const Tabs = defineComponent({
           <ol class={[s.tabs_nav, cp + '_tabs_nav']}>
             {tabs.map((item) => (
               <li
-                class={[
-                  item.props?.name === props.selected ? s.selected : '',
-                  cp + '_tabs_nav_item',
-                ]}
-                onClick={() =>
-                  context.emit('update:selected', item.props?.name)
-                }
+                class={[item.props?.name === props.selected ? s.selected : '', cp + '_tabs_nav_item']}
+                onClick={() => context.emit('update:selected', item.props?.name)}
               >
                 {item.props?.name}
               </li>
@@ -46,9 +41,7 @@ export const Tabs = defineComponent({
           <div>
             {props.rendererOnSelect ? (
               <div>
-                <div key={props.selected}>
-                  {tabs.find((item) => item.props?.name === props.selected)}
-                </div>
+                <div key={props.selected}>{tabs.find((item) => item.props?.name === props.selected)}</div>
               </div>
             ) : (
               <div>
@@ -61,16 +54,16 @@ export const Tabs = defineComponent({
         </div>
       )
     }
-  },
+  }
 })
 
 export const Tab = defineComponent({
   props: {
     name: {
-      type: String as PropType<string>,
-    },
+      type: String as PropType<string>
+    }
   },
   setup: (props, context) => {
     return () => <div>{context.slots.default?.()}</div>
-  },
+  }
 })

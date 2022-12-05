@@ -4,15 +4,15 @@ export const Datetime = defineComponent({
   props: {
     value: {
       type: [Date, String] as PropType<string | Date>,
-      required: true,
+      required: true
     },
     format: {
       type: String,
-      default: 'YYYY-MM-DD HH:mm:ss',
-    },
+      default: 'YYYY-MM-DD HH:mm:ss'
+    }
   },
   setup: (props, context) => {
     const time = computed(() => new Time(props.value).format(props.format))
     return () => <span>{time.value}</span>
-  },
+  }
 })

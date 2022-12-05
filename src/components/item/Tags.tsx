@@ -9,9 +9,9 @@ export const Tags = defineComponent({
   props: {
     kind: {
       type: String as PropType<string>,
-      required: true,
+      required: true
     },
-    selected: Number,
+    selected: Number
   },
   emits: ['update:selected'],
   setup: (props, context) => {
@@ -19,7 +19,7 @@ export const Tags = defineComponent({
       return http.get<Resources<Tag>>('/tags', {
         kind: props.kind,
         page: page + 1,
-        _mock: 'tagIndex',
+        _mock: 'tagIndex'
       })
     })
     const onSelect = (tag: Tag) => {
@@ -39,14 +39,8 @@ export const Tags = defineComponent({
       }, 500)
     }
     const onTouchMove = (e: TouchEvent) => {
-      const pointedElement = document.elementFromPoint(
-        e.touches[0].clientX,
-        e.touches[0].clientY
-      )
-      if (
-        currentTag.value !== pointedElement &&
-        currentTag.value?.contains(pointedElement) === false
-      ) {
+      const pointedElement = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY)
+      if (currentTag.value !== pointedElement && currentTag.value?.contains(pointedElement) === false) {
         clearTimeout(timer.value)
       }
     }
@@ -66,7 +60,7 @@ export const Tags = defineComponent({
             <div
               class={[s.tag, props.selected === tag.id ? s.selected : '']}
               onClick={() => onSelect(tag)}
-              onTouchstart={e => onTouchStart(e, tag)}
+              onTouchstart={(e) => onTouchStart(e, tag)}
               onTouchend={onTouchEnd}
             >
               <div class={s.sign}>{tag.sign}</div>
@@ -85,5 +79,5 @@ export const Tags = defineComponent({
         </div>
       </>
     )
-  },
+  }
 })

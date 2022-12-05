@@ -29,7 +29,8 @@ export class Time {
     const minute = this.date.getMinutes()
     const second = this.date.getSeconds()
     const msecond = this.date.getMilliseconds()
-    return pattern.replace(/YYYY/g, year.toString())
+    return pattern
+      .replace(/YYYY/g, year.toString())
       .replace(/MM/, month.toString().padStart(2, '0'))
       .replace(/DD/, day.toString().padStart(2, '0'))
       .replace(/HH/, hour.toString().padStart(2, '0'))
@@ -61,29 +62,29 @@ export class Time {
         date.setFullYear(date.getFullYear() + amount)
         const targetDate = new Date(date.getFullYear(), date.getMonth() + 1, 0, 0, 0, 0).getDate()
         date.setDate(Math.min(currentDate, targetDate))
-        break;
+        break
       case 'month':
         const d = date.getDate()
         date.setDate(1)
         date.setMonth(date.getMonth() + amount)
         const d2 = new Date(date.getFullYear(), date.getMonth() + 1, 0, 0, 0, 0).getDate()
         date.setDate(Math.min(d, d2))
-        break;
+        break
       case 'day':
         date.setDate(date.getDate() + amount)
-        break;
+        break
       case 'hour':
         date.setHours(date.getHours() + amount)
-        break;
+        break
       case 'minute':
         date.setMinutes(date.getMinutes() + amount)
-        break;
+        break
       case 'second':
         date.setSeconds(date.getSeconds() + amount)
-        break;
+        break
       case 'millisecond':
         date.setMilliseconds(date.getMilliseconds() + amount)
-        break;
+        break
       default:
         throw new Error('Time.add: unknown unit')
     }

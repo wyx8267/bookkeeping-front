@@ -13,32 +13,27 @@ export const Charts = defineComponent({
   props: {
     startDate: {
       type: String as PropType<string>,
-      required: false,
+      required: false
     },
     endDate: {
       type: String as PropType<string>,
-      required: false,
-    },
+      required: false
+    }
   },
   setup: (props, context) => {
     const kind = ref('expenses')
     const data1 = ref<Data1>([])
     const betterData1 = computed(() => {
-      return data1.value.map(
-        (item) => [item.happen_at, item.amount] as [string, number]
-      )
+      return data1.value.map((item) => [item.happen_at, item.amount] as [string, number])
     })
 
     onMounted(async () => {
-      const response = await http.get<{ groups: Data1; summary: number }>(
-        '/items/summary',
-        {
-          happen_after: props.startDate,
-          happen_before: props.endDate,
-          kind: kind.value,
-          _mock: 'itemSummary',
-        }
-      )
+      const response = await http.get<{ groups: Data1; summary: number }>('/items/summary', {
+        happen_after: props.startDate,
+        happen_before: props.endDate,
+        kind: kind.value,
+        _mock: 'itemSummary'
+      })
       data1.value = response.data.groups
     })
     return () => (
@@ -48,7 +43,7 @@ export const Charts = defineComponent({
           type="select"
           options={[
             { value: 'expenses', text: '支出' },
-            { value: 'income', text: '收入' },
+            { value: 'income', text: '收入' }
           ]}
           v-model={kind.value}
         />
@@ -57,5 +52,5 @@ export const Charts = defineComponent({
         <Bars />
       </div>
     )
-  },
+  }
 })

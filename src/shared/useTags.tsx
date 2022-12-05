@@ -1,5 +1,5 @@
-import { AxiosResponse } from "axios";
-import { onMounted, ref } from "vue";
+import { AxiosResponse } from 'axios'
+import { onMounted, ref } from 'vue'
 
 type Fetcher = (page: number) => Promise<AxiosResponse<Resources<Tag>>>
 export const useTags = (fetcher: Fetcher) => {

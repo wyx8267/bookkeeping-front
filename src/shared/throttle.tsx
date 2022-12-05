@@ -8,7 +8,7 @@ export const throttle = <T extends (...args: unknown[]) => any>(fn: T, time: num
       result = fn(...args)
       timer = setTimeout(() => {
         timer = undefined
-      }, time);
+      }, time)
       return result
     }
   }

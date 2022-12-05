@@ -1,9 +1,4 @@
-import axios, {
-  AxiosError,
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-} from 'axios'
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import {
   mockItemCreate,
   mockItemIndex,
@@ -12,7 +7,7 @@ import {
   mockSession,
   mockTagEdit,
   mockTagIndex,
-  mockTagShow,
+  mockTagShow
 } from '../mock/mock'
 
 type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
@@ -24,45 +19,29 @@ export class Http {
   instance: AxiosInstance
   constructor(baseURL: string) {
     this.instance = axios.create({
-      baseURL,
+      baseURL
     })
   }
-  get<R = unknown>(
-    url: string,
-    query?: Record<string, JSONValue>,
-    config?: GetConfig
-  ) {
+  get<R = unknown>(url: string, query?: Record<string, JSONValue>, config?: GetConfig) {
     return this.instance.request<R>({
       ...config,
       url,
       params: query,
-      method: 'get',
+      method: 'get'
     })
   }
-  post<R = unknown>(
-    url: string,
-    data?: Record<string, JSONValue>,
-    config?: PostConfig
-  ) {
+  post<R = unknown>(url: string, data?: Record<string, JSONValue>, config?: PostConfig) {
     return this.instance.request<R>({ ...config, url, data, method: 'post' })
   }
-  patch<R = unknown>(
-    url: string,
-    data?: Record<string, JSONValue>,
-    config?: PatchConfig
-  ) {
+  patch<R = unknown>(url: string, data?: Record<string, JSONValue>, config?: PatchConfig) {
     return this.instance.request<R>({ ...config, url, data, method: 'patch' })
   }
-  delete<R = unknown>(
-    url: string,
-    query?: Record<string, string>,
-    config?: DeleteConfig
-  ) {
+  delete<R = unknown>(url: string, query?: Record<string, string>, config?: DeleteConfig) {
     return this.instance.request<R>({
       ...config,
       url,
       params: query,
-      method: 'delete',
+      method: 'delete'
     })
   }
 }
@@ -94,7 +73,7 @@ const mock = (response: AxiosResponse) => {
       ;[response.status, response.data] = mockItemIndexBalance(response.config)
       return true
     case 'itemSummary':
-      [response.status, response.data] = mockItemSummary(response.config)
+      ;[response.status, response.data] = mockItemSummary(response.config)
       return true
   }
   return false

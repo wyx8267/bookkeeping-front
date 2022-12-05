@@ -1,5 +1,5 @@
-import { defineComponent, PropType } from 'vue';
-import { RouterLink } from 'vue-router';
+import { defineComponent, PropType } from 'vue'
+import { RouterLink } from 'vue-router'
 // import s from './SkipFeatures.module.scss';
 export const SkipFeatures = defineComponent({
   setup: (props, context) => {
@@ -8,7 +8,7 @@ export const SkipFeatures = defineComponent({
     }
     return () => (
       <span onClick={onClick}>
-        <RouterLink to='/start'>跳过</RouterLink>
+        <RouterLink to="/start">跳过</RouterLink>
       </span>
     )
   }
