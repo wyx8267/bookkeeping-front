@@ -11,6 +11,7 @@ type JSONValue =
   | string
   | number
   | null
+  | undefined
   | boolean
   | JSONValue[]
   | { [key: string]: JSONValue }
