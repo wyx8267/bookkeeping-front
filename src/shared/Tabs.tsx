@@ -9,7 +9,7 @@ export const Tabs = defineComponent({
     classPrefix: {
       type: String
     },
-    rendererOnSelect: {
+    rerenderOnSelect: {
       type: Boolean as PropType<boolean>,
       default: false
     }
@@ -39,7 +39,7 @@ export const Tabs = defineComponent({
             ))}
           </ol>
           <div>
-            {props.rendererOnSelect ? (
+            {props.rerenderOnSelect ? (
               <div>
                 <div key={props.selected}>{tabs.find((item) => item.props?.name === props.selected)}</div>
               </div>
