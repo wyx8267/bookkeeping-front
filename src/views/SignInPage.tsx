@@ -8,10 +8,11 @@ import { Icon } from '../shared/Icon'
 import { hasError, validate } from '../shared/validate'
 import s from './SignInPage.module.scss'
 import { useRoute, useRouter } from 'vue-router'
-import { refreshMe } from '../shared/me'
 import { BackIcon } from '../shared/BackIcon'
+import { useMeStore } from '../stores/useMeStore'
 export const SignInPage = defineComponent({
   setup: (props, context) => {
+    const meStore = useMeStore()
     const refValidationCode = ref<any>()
     const router = useRouter()
     const route = useRoute()
@@ -44,7 +45,7 @@ export const SignInPage = defineComponent({
         // const returnTo = localStorage.getItem('return')
         // router.push('/sign_in?return_to=' + encodeURIComponent(route.fullPath))
         const returnTo = route.query.return_to?.toString()
-        refreshMe()
+        meStore.refreshMe()
         router.push(returnTo || '/')
       }
     }
