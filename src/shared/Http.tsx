@@ -48,7 +48,7 @@ export class Http {
 }
 
 const mock = (response: AxiosResponse) => {
-  if (true || location.hostname !== 'localhost' && location.hostname !== '127.18.0.2') {
+  if (true || location.hostname !== 'localhost' && location.hostname !== '127.18.0.3') {
     return false
   }
   switch (response.config?._mock) {
@@ -80,7 +80,7 @@ const mock = (response: AxiosResponse) => {
   return false
 }
 
-export const http = new Http('/api/v1')
+export const http = new Http(isDev() ? '/api/v1' : 'http://47.109.52.85:3000/api/v1')
 
 http.instance.interceptors.request.use((config) => {
   const jwt = localStorage.getItem('jwt')
@@ -142,3 +142,10 @@ http.instance.interceptors.response.use(
     throw error
   }
 )
+
+function isDev() {
+  if (location.hostname !== 'localhost' && location.hostname !== '127.18.0.3') {
+    return false
+  }
+  return true
+}
