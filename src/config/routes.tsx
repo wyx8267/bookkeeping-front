@@ -1,7 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 import { ItemCreate } from '../components/item/ItemCreate'
 import { ItemList } from '../components/item/ItemList'
-import { TagPage } from '../views/TagPage'
 import { First } from '../components/welcome/First'
 import { FirstActions } from '../components/welcome/FirstActions'
 import { Fourth } from '../components/welcome/Fourth'
@@ -10,20 +9,12 @@ import { Second } from '../components/welcome/Second'
 import { SecondActions } from '../components/welcome/SecondActions'
 import { Third } from '../components/welcome/Third'
 import { ThirdActions } from '../components/welcome/ThirdActions'
-import { ItemPage } from '../views/ItemPage'
-import { Welcome } from '../views/Welcome'
-import { TagEdit } from '../components/tag/TagEdit'
-import { TagCreate } from '../components/tag/TagCreate'
-import { SignInPage } from '../views/SignInPage'
-import { StatisticsPage } from '../views/StatisticsPage'
-import { http } from '../shared/Http'
-import { ComingSoon } from '../shared/ComingSoon'
 
 export const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/welcome' },
   {
     path: '/welcome',
-    component: Welcome,
+    component: () => import('../views/Welcome'),
     beforeEnter: (to, from, next) => {
       localStorage.getItem('skipFeatures') === 'yes' ? next('/items') : next()
     },
@@ -37,7 +28,7 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     path: '/items',
-    component: ItemPage,
+    component: () => import('../views/ItemPage'),
     children: [
       { path: '', component: ItemList },
       { path: 'create', component: ItemCreate }
@@ -45,14 +36,14 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     path: '/tags',
-    component: TagPage,
+    component: () => import('../views/TagPage'),
     children: [
-      { path: 'create', component: TagCreate },
-      { path: ':id/edit', component: TagEdit }
+      { path: 'create', component: () => import('../components/tag/TagCreate') },
+      { path: ':id/edit', component: () => import('../components/tag/TagEdit') }
     ]
   },
-  { path: '/sign_in', component: SignInPage },
-  { path: '/statistics', component: StatisticsPage },
-  { path: '/export', component: ComingSoon },
-  { path: '/notify', component: ComingSoon }
+  { path: '/sign_in', component: () => import('../views/SignInPage') },
+  { path: '/statistics', component: () => import('../views/StatisticsPage') },
+  { path: '/export', component: () => import('../shared/ComingSoon') },
+  { path: '/notify', component: () => import('../shared/ComingSoon') }
 ]

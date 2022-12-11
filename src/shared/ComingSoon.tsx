@@ -4,7 +4,7 @@ import { Button } from './Button';
 import { Center } from './Center';
 import s from './ComingSoon.module.scss';
 import { Icon } from './Icon';
-export const ComingSoon = defineComponent({
+const ComingSoon = defineComponent({
   props: {
     name: {
       type: String as PropType<string>
@@ -28,3 +28,5 @@ export const ComingSoon = defineComponent({
     )
   }
 })
+
+export default ComingSoon

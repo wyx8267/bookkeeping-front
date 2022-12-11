@@ -10,7 +10,7 @@ import s from './SignInPage.module.scss'
 import { useRoute, useRouter } from 'vue-router'
 import { BackIcon } from '../shared/BackIcon'
 import { useMeStore } from '../stores/useMeStore'
-export const SignInPage = defineComponent({
+const SignInPage = defineComponent({
   setup: (props, context) => {
     const meStore = useMeStore()
     const refValidationCode = ref<any>()
@@ -105,3 +105,5 @@ export const SignInPage = defineComponent({
     )
   }
 })
+
+export default SignInPage

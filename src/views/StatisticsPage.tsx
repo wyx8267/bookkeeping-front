@@ -2,7 +2,7 @@ import { defineComponent, PropType } from 'vue'
 import { Charts } from '../components/statistics/Charts'
 import { TimeTabsLayout } from '../layouts/TimeTabsLayout'
 import s from './StatisticsPage.module.scss'
-export const StatisticsPage = defineComponent({
+const StatisticsPage = defineComponent({
   props: {
     name: {
       type: String as PropType<string>
@@ -12,3 +12,5 @@ export const StatisticsPage = defineComponent({
     return () => <TimeTabsLayout component={Charts} rerenderOnSwitchTab={true} hideThisYear={true} />
   }
 })
+
+export default StatisticsPage
